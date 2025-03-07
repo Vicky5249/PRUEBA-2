@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Escaneos</title>
+    <link rel="stylesheet" href="historial.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Historial de Escaneos</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Planta</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody id="historial-body">
+                <!-- Se llenará dinámicamente -->
+            </tbody>
+        </table>
+
+        <div class="btn-container">
+            <button class="btn btn-danger" onclick="limpiarHistorial()">Borrar Historial</button>
+            <a href="index.html" class="btn btn-primary">Volver al Inicio</a>
+        </div>
+    </div>
+
+    <script>
+        function cargarHistorial() {
+            const historial = JSON.parse(localStorage.getItem("historial")) || [];
+            const historialBody = document.getElementById("historial-body");
+            historialBody.innerHTML = "";
+
+            historial.forEach(item => {
+                const row = document.createElement("tr");
+                row.innerHTML = `<td>${item.planta}</td><td>${item.fecha}</td>`;
+                historialBody.appendChild(row);
+            });
+        }
+
+        function limpiarHistorial() {
+            localStorage.removeItem("historial");
+            cargarHistorial();
+        }
+
+        document.addEventListener("DOMContentLoaded", cargarHistorial);
+    </script>
+
+</body>
+</html>
