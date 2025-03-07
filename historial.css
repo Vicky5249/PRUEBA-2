@@ -131,7 +131,8 @@ button, .btn {
     }
 
     th, td {
-        padding: 8px;
+       padding: 17px;
+        background-color:#000000;
     }
 
     button, .btn {
